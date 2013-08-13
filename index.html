@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Git Basics Workshop</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Daniel Chcouri">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+        <link rel="stylesheet" href="http://www.jointjs.com/css/joint.css" />
+        <script src="http://www.jointjs.com/js/joint.js"></script>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Git Branching Workshop</h1>
+					<p>
+						<small>By <a href="http://theosp.github.io/">Daniel Chcouri</a> / <a href="http://theosp.github.io/">theosp.github.io</a></small>
+					</p>
+				</section>
+
+                <section>
+                    <h2>Snapshots, Not Differences</h2>
+                </section>
+
+                <section>
+                    <h2>Traditional Version Control System</h2>
+
+                    <p>Tend to store data as changes to a base version of each file</p>
+
+                    <img src="./images/18333fig0104-tn.png" width="100%">
+                </section>
+
+                <section>
+                    <h2>The Git Approach</h2>
+
+                    <p>Data as snapshots of the project over time</p>
+
+                    <img src="./images/18333fig0105-tn.png" width="100%">
+                </section>
+
+                <section>
+                    <h2>Sections of Git Project</h2>
+
+                    <ul>
+                        <li>Git Directory - The Git DB</li>
+                        <li>Working Directory</li>
+                        <li>Staging Area</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Git Directory - The Git DB</h2>
+
+                    <p>Stores the metadata and object database for your project</p>
+                    <p>Copied when you clone a repository</p>
+                </section>
+
+                <section>
+                    <h2>Working Directory</h2>
+
+                    <p>A single checkout of one version of the project; extracted from the db for modify</p>
+                </section>
+
+                <section>
+                    <h2>Staging Area</h2>
+                    <h3>(AKA the index)</h3>
+
+                    <p>Stores information about what will go into your next commit</p>
+                </section>
+
+                <section>
+                    <img src="./images/18333fig0106-tn.png" width="100%">
+                </section>
+
+                <section>
+                    <h2>Workflow</h2>
+
+                    <ul>
+                        <li>Modify files in your working directory</li>
+                        <li>Stage the files, adding snapshots of them to your staging area</li>
+                        <li>Do a commit, stores the staged snapshot permanently to your Git directory</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Initializing a Repository in an Existing Directory</h2>
+
+					<pre><code data-trim contenteditable>
+                        $ git init
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Cloning an Existing Repository</h2>
+
+					<pre><code data-trim contenteditable>
+                        $ git clone https://github.com/joyent/node.git
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Recording Changes</h2>
+                </section>
+
+                <section>
+                    <img src="./images/18333fig0201-tn.png" width="100%">
+                </section>
+
+                <section>
+                    <h2>Checking the Status of Your Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git status
+# On branch master
+nothing to commit (working directory clean)
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Checking the Status of Your Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ vim README
+$ git status
+# On branch master
+# Untracked files:
+#   (use "git add &lt;file>..." to include in what will be committed)
+#
+#   README
+nothing added to commit but untracked files
+present (use "git add" to track)
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Tracking New Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git add README
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#   new file:   README
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Staging Modified Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#   new file:   README
+#
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#
+#   modified:   benchmarks.rb
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Staging Modified Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git add benchmarks.rb
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#   new file:   README
+#   modified:   benchmarks.rb
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Staging Modified Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ vim benchmarks.rb
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#   new file:   README
+#   modified:   benchmarks.rb
+#
+# Changes not staged for commit:
+#   (use "git add &lt;file>..." to update what will be committed)
+#
+#   modified:   benchmarks.rb
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Staging Modified Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git add benchmarks.rb
+$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#   new file:   README
+#   modified:   benchmarks.rb
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Viewing Your Staged and Unstaged Changes</h2>
+                </section>
+
+                <section>
+                    <h2>Changed but not yet staged</h2>
+
+					<pre><code data-trim contenteditable>
+$ git diff
+					</code></pre>
+
+                    <pre><code data-trim contenteditable>
+diff --git a/benchmarks.rb b/benchmarks.rb
+index 3cb747f..da65585 100644
+--- a/benchmarks.rb
++++ b/benchmarks.rb
+@@ -36,6 +36,10 @@ def main
+           @commit.parents[0].parents[0].parents[0]
+         end
+
++        run_code(x, 'commits 1') do
++          git.commits.size
++        end
++
+         run_code(x, 'commits 2') do
+           log = git.commits('master', 15)
+           log.size
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Staged vs last commit</h2>
+
+					<pre><code data-trim contenteditable>
+$ git diff --staged
+					</code></pre>
+
+                    <pre><code data-trim contenteditable>
+diff --git a/README b/README
+new file mode 100644
+index 0000000..03902a1
+--- /dev/null
++++ b/README2
+@@ -0,0 +1,5 @@
++grit
++ by Tom Preston-Werner, Chris Wanstrath
++ http://github.com/mojombo/grit
++
++Grit is a Ruby library for extracting information from a Git repository
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Example</h2>
+
+					<pre><code data-trim contenteditable>
+				$ git add benchmarks.rb
+$ echo '# test line' >> benchmarks.rb
+$ git status
+# On branch master
+#
+# Changes to be committed:
+#
+#   modified:   benchmarks.rb
+#
+# Changes not staged for commit:
+#
+#   modified:   benchmarks.rb
+#	
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Example</h2>
+
+					<pre><code data-trim contenteditable>
+                    $ git diff
+diff --git a/benchmarks.rb b/benchmarks.rb
+index e445e28..86b2f7c 100644
+--- a/benchmarks.rb
++++ b/benchmarks.rb
+@@ -127,3 +127,4 @@ end
+ main()
+
+ ##pp Grit::GitRuby.cache_client.stats
++# test line
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Example</h2>
+
+					<pre><code data-trim contenteditable>
+$ git diff --staged
+diff --git a/benchmarks.rb b/benchmarks.rb
+index 3cb747f..e445e28 100644
+--- a/benchmarks.rb
++++ b/benchmarks.rb
+@@ -36,6 +36,10 @@ def main
+          @commit.parents[0].parents[0].parents[0]
+        end
+
++        run_code(x, 'commits 1') do
++          git.commits.size
++        end
++
+        run_code(x, 'commits 2') do
+          log = git.commits('master', 15)
+          log.size
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Committing Your Changes</h2>
+
+					<pre><code data-trim contenteditable>
+$ git commit
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+Story 182: Fix benchmarks for speed
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#       new file:   README
+#       modified:   benchmarks.rb
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Committing Your Changes</h2>
+
+					<pre><code data-trim contenteditable>
+$ git commit -m "Story 182: Fix benchmarks for speed"
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Skipping the Staging Area</h2>
+
+					<pre><code data-trim contenteditable>
+$ git status
+# On branch master
+#
+# Changes not staged for commit:
+#
+#   modified:   benchmarks.rb
+#
+$ git commit -a -m 'added new benchmarks'
+[master 83e38c7] added new benchmarks
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+					</code></pre>
+                </section>
+
+				<section>
+                    <h3>Based on the Pro Git book</h3><br />
+                    <h3>Daniel Chcouri / theosp.github.io</h3><br />
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+                rollingLinks: false,
+
+				theme: "beige", // available themes are in /css/theme
+				transition: "linear", // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
