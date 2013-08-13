@@ -40,7 +40,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Git Branching Workshop</h1>
+					<h1>Git Basics Workshop</h1>
 					<p>
 						<small>By <a href="http://theosp.github.io/">Daniel Chcouri</a> / <a href="http://theosp.github.io/">theosp.github.io</a></small>
 					</p>
@@ -405,6 +405,68 @@ $ git status
 $ git commit -a -m 'added new benchmarks'
 [master 83e38c7] added new benchmarks
  1 files changed, 5 insertions(+), 0 deletions(-)
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Removing Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ rm grit.gemspec
+$ git status
+# On branch master
+#
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#
+#       deleted:    grit.gemspec
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Removing Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git rm grit.gemspec
+rm 'grit.gemspec'
+$ git status
+# On branch master
+#
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       deleted:    grit.gemspec
+#
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Remove File From Tree But Keep On FS</h2>
+
+					<pre><code data-trim contenteditable>
+$ git rm --cached readme.txt
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Moving Files</h2>
+
+					<pre><code data-trim contenteditable>
+$ git mv file_from file_to
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+$ git mv README.txt README
+$ git status
+# On branch master
+# Your branch is ahead of 'origin/master' by 1 commit.
+#
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file>..." to unstage)
+#
+#       renamed:    README.txt -> README
+#
 					</code></pre>
                 </section>
 
