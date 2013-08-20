@@ -1,4 +1,4 @@
-# Multiplayer Pong Presentation
+# Git Basics Presentation
 
 Install dependencies:
 

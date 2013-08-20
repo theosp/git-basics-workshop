@@ -470,6 +470,58 @@ $ git status
 					</code></pre>
                 </section>
 
+                <section>
+                    <h2>Remotes Managment</h2>
+                </section>
+
+                <section>
+                    <h2>Remote</h2>
+                    <ul>
+                        <li>Project's versions hosted on the Internet or network</li>
+                        <li>Let you collaborate with others</li>
+                        <li>A remote can be either: read-only or read/write</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Showing Your Remotes</h2>
+
+					<pre><code data-trim contenteditable>
+$ git remote
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+$ git clone git://github.com/schacon/ticgit.git
+Initialized empty Git repository in /private/tmp/ticgit/.git/
+remote: Counting objects: 595, done.
+remote: Compressing objects: 100% (269/269), done.
+remote: Total 595 (delta 255), reused 589 (delta 253)
+Receiving objects: 100% (595/595), 73.31 KiB | 1 KiB/s, done.
+Resolving deltas: 100% (255/255), done.
+$ cd ticgit
+$ git remote
+origin
+					</code></pre>
+                </section>
+
+                <section>
+                    <h2>Showing Your Remotes</h2>
+
+					<pre><code data-trim contenteditable>
+$ git remote -v
+					</code></pre>
+
+					<pre><code data-trim contenteditable>
+$ cd grit
+$ git remote -v
+bakkdoor  git://github.com/bakkdoor/grit.git
+cho45     git://github.com/cho45/grit.git
+defunkt   git://github.com/defunkt/grit.git
+koke      git://github.com/koke/grit.git
+origin    git@github.com:mojombo/grit.git
+					</code></pre>
+                </section>
+
 				<section>
                     <h3>Based on the Pro Git book</h3><br />
                     <h3>Daniel Chcouri / theosp.github.io</h3><br />
